@@ -1,0 +1,717 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_QUOTA-REPORTS",
+      "label": "Quota-reports",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.4.0"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "View Directy Quotas",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1613153389188,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "${DS_QUOTA-REPORTS}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.4.0",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "quota",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "quotaid"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "hard"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cluster",
+              "operator": "=~",
+              "value": "/^$cluster$/"
+            },
+            {
+              "condition": "AND",
+              "key": "path",
+              "operator": "=~",
+              "value": "/^$path$/"
+            },
+            {
+              "condition": "AND",
+              "key": "quotatype",
+              "operator": "=",
+              "value": "directory"
+            }
+          ]
+        }
+      ],
+      "title": "Hard Quota",
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_QUOTA-REPORTS}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.4.0",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "quota",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "quotaid"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "advise"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cluster",
+              "operator": "=~",
+              "value": "/^$cluster$/"
+            },
+            {
+              "condition": "AND",
+              "key": "path",
+              "operator": "=~",
+              "value": "/^$path$/"
+            },
+            {
+              "condition": "AND",
+              "key": "quotatype",
+              "operator": "=",
+              "value": "directory"
+            }
+          ]
+        }
+      ],
+      "title": "Advisory Quota",
+      "type": "stat"
+    },
+    {
+      "datasource": "${DS_QUOTA-REPORTS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.4.0",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "quota",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "quotaid"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "soft"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cluster",
+              "operator": "=~",
+              "value": "/^$cluster$/"
+            },
+            {
+              "condition": "AND",
+              "key": "path",
+              "operator": "=~",
+              "value": "/^$path$/"
+            }
+          ]
+        }
+      ],
+      "title": "Soft Quota",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_QUOTA-REPORTS}",
+      "description": "Display the strorage used on the path.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 19,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.0",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:2963",
+          "alias": "Hard",
+          "color": "#FF7383",
+          "fill": 0,
+          "lines": true
+        },
+        {
+          "$$hashKey": "object:793",
+          "alias": "Soft",
+          "color": "#F2CC0C",
+          "fill": 0,
+          "lines": true
+        },
+        {
+          "$$hashKey": "object:847"
+        },
+        {
+          "$$hashKey": "object:864",
+          "alias": "Physical",
+          "color": "#3274D9",
+          "fill": 2,
+          "lines": true
+        },
+        {
+          "$$hashKey": "object:944",
+          "alias": "Advise",
+          "color": "#96D98D",
+          "lines": true
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "used",
+          "groupBy": [],
+          "measurement": "quota",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"quotaid\", \"hard\" FROM \"quota\" WHERE (\"cluster\" =~ /^$cluster$/ AND \"path\" =~ /^$path$/ AND \"quotatype\" = 'directory') AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "quotaid"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "phys"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cluster",
+              "operator": "=~",
+              "value": "/^$cluster$/"
+            },
+            {
+              "condition": "AND",
+              "key": "path",
+              "operator": "=~",
+              "value": "/^$path$/"
+            },
+            {
+              "condition": "AND",
+              "key": "quotatype",
+              "operator": "=",
+              "value": "directory"
+            }
+          ]
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:1514",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Physical Storage Consumed",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {}
+        }
+      ],
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:385",
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:386",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "${DS_QUOTA-REPORTS}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "auto",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 24,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 6,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.4.0",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "quota",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "quotaid"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "phys"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "applog"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "fslog"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cluster",
+              "operator": "=~",
+              "value": "/^$cluster$/"
+            },
+            {
+              "condition": "AND",
+              "key": "path",
+              "operator": "=~",
+              "value": "/^$path$/"
+            },
+            {
+              "condition": "AND",
+              "key": "quotatype",
+              "operator": "=",
+              "value": "directory"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Logical Usage",
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [
+    "isilon"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_QUOTA-REPORTS}",
+        "definition": "",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": "show tag values with key = \"cluster\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_QUOTA-REPORTS}",
+        "definition": "show tag values with key=\"path\" where quotatype=~/directory/",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "path",
+        "options": [],
+        "query": "show tag values with key=\"path\" where quotatype=~/directory/",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-90d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Directory Quotas",
+  "uid": "e-PgtLpMk",
+  "version": 15
+}
